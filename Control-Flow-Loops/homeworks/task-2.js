@@ -7,15 +7,9 @@
 
 const n = 1000;
 let num = 0;
-
 let i = n;
-
-while(true){
-
+while(i > 50){
     i = i / 2;
     num++;
-    if(i < 50){
-        console.log(num)
-        break;
-    }
 }
+console.log(num)
