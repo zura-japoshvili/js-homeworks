@@ -10,6 +10,8 @@ let num = 0;
 let i = n;
 while(i > 50){
     i = i / 2;
-    num++;
+    if (i > 50) {
+        num++;
+    }
 }
 console.log(num)
