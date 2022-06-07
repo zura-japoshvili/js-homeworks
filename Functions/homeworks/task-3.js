@@ -31,7 +31,7 @@ function genericFunction(func){
     if(typeof func !== 'function'){
         throw new Error ("Error: passed parameter should be a function");
     }else{
-        func;
+        func();
     }
 }
 
@@ -40,7 +40,7 @@ function sayHello(){
 }
 
 try{
-    genericFunction(sayHello());
+    genericFunction(sayHello);
 } catch(e) {
     console.log(e.message);
 }
