@@ -28,19 +28,20 @@
 // Assignment to constant variable.
 
 function genericFunction(func){
-    if(typeof func !== 'function'){
-        throw new Error ("Error: passed parameter should be a function");
-    }else{
-        func();
+    try{
+        func("Hello");
+    } catch(e) {
+        console.log(e.message);
     }
 }
 
-function sayHello(){
-    console.log('hello');
+function sayHello(value){
+    if(value !== "Hello"){
+        throw new Error ("Error: Just say hello");
+    }else{
+        console.log(value);
+    }
 }
 
-try{
-    genericFunction(sayHello);
-} catch(e) {
-    console.log(e.message);
-}
+
+genericFunction(sayHello);
