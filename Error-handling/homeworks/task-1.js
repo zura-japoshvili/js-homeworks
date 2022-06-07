@@ -12,7 +12,7 @@
 // errors, if `value` is greater than `nearLimit`, just console log a warning message, 
 //however, if value is greater than `limit`, then rethrow an error.
 
-const value = 101;
+const value = 100;
 const nearLimit = 90;
 const limit = 100;
 
