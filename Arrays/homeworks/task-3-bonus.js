@@ -21,38 +21,33 @@
 // rotate(arr, 2);  // result: [2,3,1]
 
 const array = [1,2,3];
-let newArr = array;
-let count = 0;
-
 function rotate(arr, value, d="right"){
-    arr = arr !== newArr ? newArr : array; 
-
-    if(!Array.isArray(arr)){
+    let newArr = arr;
+    if(!Array.isArray(newArr)){
         throw new Error ("Error: first parameter should be an array");
     }else if(typeof value !== 'number'){
         throw new Error ("Error: second parameter should be a number");
+    }else if(d !== 'right' && d !== 'left'){
+        throw new Error ("Error: The value of the third parameter must be 'left' or 'right'");
     }else{
-        // let index = arr.indexOf(value);
         if(d === 'right'){
-            // let temp = (arr.length - 1) > index ? arr[index + 1] : arr[0];
-            tmp = arr.pop();
-            arr.unshift(tmp);
-            count ++;
-            newArr = arr;
+            for(let i = 0; i< value; i++){
+                tmp = newArr.pop();
+                newArr.unshift(tmp);
+            }
         }else{
-            tmp = arr.shift();
-            arr.push(tmp);
-            count ++;
-            newArr = arr;
+            for(let i = 0; i< value; i++){
+                tmp = newArr.shift();
+                newArr.push(tmp);
+            }
         }
     }
-    return arr;
+    console.log(array);
 }
-
 try {
-    console.log(rotate(array, 1, 'left'), count);
-    console.log(rotate(array, 1, 'left'), count);
-    console.log(rotate(array, 1, 'right'), count);
+    rotate(array, 1, 'left');
+    rotate(array, 1, 'left');
+    rotate(array, 1);
 } catch (error) {
     console.log(error.message);
 }
