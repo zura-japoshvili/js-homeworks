@@ -21,9 +21,9 @@
 // rotate(arr, 2);  // result: [2,3,1]
 
 const array = [1,2,3];
+
 function rotate(arr, value, d="right"){
-    let newArr = arr;
-    if(!Array.isArray(newArr)){
+    if(!Array.isArray(arr)){
         throw new Error ("Error: first parameter should be an array");
     }else if(typeof value !== 'number'){
         throw new Error ("Error: second parameter should be a number");
@@ -32,22 +32,21 @@ function rotate(arr, value, d="right"){
     }else{
         if(d === 'right'){
             for(let i = 0; i< value; i++){
-                tmp = newArr.pop();
-                newArr.unshift(tmp);
+                tmp = arr.pop();
+                arr.unshift(tmp);
             }
         }else{
             for(let i = 0; i< value; i++){
-                tmp = newArr.shift();
-                newArr.push(tmp);
+                tmp = arr.shift();
+                arr.push(tmp);
             }
         }
     }
-    console.log(array);
+    return arr;
 }
+
 try {
-    rotate(array, 1, 'left');
-    rotate(array, 1, 'left');
-    rotate(array, 1);
+    console.log(rotate(array, 1, 'left'));
 } catch (error) {
     console.log(error.message);
 }
