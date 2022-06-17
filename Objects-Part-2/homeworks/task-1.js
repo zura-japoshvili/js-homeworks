@@ -42,8 +42,18 @@ const data = {
 };
 
 Object.defineProperty(Object.prototype, 'mergeDeepRight', {
-    value: function(p) {
-        Object.assign(data , p);
+    value: function(obj) {
+        // Object.assign(data , obj);
+        let objProps = Object.getOwnPropertyNames(obj)
+        for(let key of objProps){
+            if(typeof obj[key] !== 'object') {
+                this[key] = obj[key];
+            }   else if(Array.isArray(obj[key])) { 
+                this[key] = this[key].concat(obj[key]);
+            } else {
+                this[key].mergeDeepRight(obj[key]);
+            }
+          } 
     },
     enumerable: false, 
 });
