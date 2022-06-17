@@ -43,7 +43,7 @@ const data = {
 
 Object.defineProperty(Object.prototype, 'mergeDeepRight', {
     value: function(p) {
-        Object.assign( data , p);
+        Object.assign(data , p);
     },
     enumerable: false, 
 });
