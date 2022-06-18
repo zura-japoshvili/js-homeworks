@@ -19,16 +19,18 @@
 // ```
 
 function mix(...funcs){
-    if(!funcs.every(value => typeof value === 'function')){
-        throw new Error("every parameter should be a callback")
-    }
-    let callback = funcs[0]
-    let firstElement = callback()
-    for(let i = 1; i < funcs.length; i++){
-        let element = funcs[i]
-        firstElement =  element(firstElement)
-    }
-    return firstElement
+    // if(!funcs.every(value => typeof value === 'function')){
+    //     throw new Error("every parameter should be a function")
+    // }
+    let result;
+    funcs.forEach(cb => {
+        if(typeof cb !== 'function'){
+            throw new Error("every parameter should be a function");
+        }
+        result = cb(result);
+    })
+
+    return result;
 }
 
 const result = mix(
@@ -38,7 +40,7 @@ const result = mix(
   (prev) => prev + 2,
   (prev) => prev + 2
 );
-console.log(result)
+console.log(result);
 
 
 
