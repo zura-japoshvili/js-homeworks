@@ -22,9 +22,12 @@
 
 class Validator {
     #emailRegex = RegExp(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+
     isEmail(email){
-        
         this.email = email;
+        if(typeof email !== 'string') throw new TypeError("Passd parameters should be a string");
+
+
         if(this.#emailRegex.test(email)) {
             return true;
         }
@@ -33,6 +36,7 @@ class Validator {
     }
     isDomain(domain){
         this.domain = domain;
+        if(typeof domain !== 'string') throw new TypeError("Passd parameters should be a string");
         if(/^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9](?:\.[a-zA-Z]{2,})+$/.test(domain)){
             return true;
         }
@@ -40,6 +44,7 @@ class Validator {
     }
     isDate(date){
         this.date = date;
+        if(typeof date !== 'string') throw new TypeError("Passd parameters should be a string");
         if(/^\d{1,2}\.\d{1,2}\.\d{4}$/.test(date)){
             return true;
         }
@@ -47,6 +52,7 @@ class Validator {
     }
     isPhone(number){
         this.number = number;
+        if(typeof number !== 'string') throw new TypeError("Passd parameters should be a string");
         if(/^(\([0-9]{3}\) |[0-9]{2}-)[0-9]{2}-[0-9]{2}/.test(number)){
             return true;
         }
@@ -57,4 +63,4 @@ let validator = new Validator();
 console.log(validator.isEmail('jshtml@mail.ru'));
 console.log(validator.isDomain('jshtml.net'));
 console.log(validator.isDate('12.05.2020'));
-console.log(validator.isPhone('(555) 55-55-55'))
+console.log(validator.isPhone('(555) 55-55-55'));
