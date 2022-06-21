@@ -1,30 +1,21 @@
-// #### Task 1
+// Improve `DB` class from previous task.
 
-// Create class `DB` that will implement `CRUD` model.
+// - Add a `find` method that will return an array of users that satisfy the condition passed as a parameter.
+// - Generate an error if the `query` is not valid.
+// - The fields `name` and` country` are looking for a 100% match.
+// - The fields `age` and` salary` accept an object in which there must be either 2 parameters `min` 
+// and` max` or at least one of them.
+// - Return an empty array if it was not possible to find users that satisfy the request object.
 
-// - As a data structure, use `Map`.
-// - Implement the `create` method, which get an object as parameter and validates it; if object is invalid, 
-// it generates an error.
-// - The `create` method returns the ` id`.
-// - When creating a user, generate a unique `id`, which is the key for the user object in the ` Map` structure.
-// - The `read` method accepts the user id, if there is no such user to return ` null`, and if there is, return 
-// the user object with the `id` field inside the object.
-// - If you pass a non-string to the `read` method then generate an error.
-// - If don't pass a parameter to the method `read` then generate an error.
-// - The `readAll` method returns an array of users.
-// - Generate an error if a parameter is passed to the `readAll` method.
-// - The `update` method updates the user.
-// - The `update` method takes 2 required parameters.
-// - The `update` method generates an error if a non-existing ` id` is passed.
-// - The `update` method generates an error if ` id` is passed with a type not a string.
-// - The `update` method generates an error if the second parameter is not valid.
-// - The method `delete` deletes the user.
-// - Generate an error if passed to the `delete` method non-existent or invalid `id`.
+// ```javascript
+
+// const customers = db.find(query); // array of users
 
 class DB {
     constructor() {
         this.map = new Map()
         this.id = 0
+        
     }
     checkObj(person){
         if(!person.hasOwnProperty('name') && person.name !== 'string'){
@@ -83,17 +74,63 @@ class DB {
         }
         
     }
+    find(query){
+        this.queryArr = [];
+        for (const iterator of this.map.values()) {
+            this.validator = true;
+            if(iterator.country !== query.country){
+                this.validator = false;
+            }if(query.age.hasOwnProperty('min')){
+                if(query.age.min > iterator.age){
+                    this.validator = false;
+                }
+            }if(query.age.hasOwnProperty('max')){
+                if(query.age.max < iterator.age){
+                    this.validator = false;
+                }
+            }if(query.salary.hasOwnProperty('min')){
+                if(query.salary.min > iterator.salary){
+                    this.validator = false;
+                }
+            }if(query.salary.hasOwnProperty('max')){
+                if(query.salary.max < iterator.salary){
+                    this.validator = false;
+                }
+            }
+            if(this.validator === true){
+                this.queryArr.push(iterator);
+            }
+        }
+        return this.queryArr;
+    }
 }
 const db = new DB();
 const person = {
     name: 'Pitter', // required field with type string
     age: 21, // required field with type number
     country: 'ge', // required field with type string
-    salary: 500 // required field with type number
+    salary: 700 // required field with type number
+};
+const person2 = {
+    name: 'Zura', // required field with type string
+    age: 51, // required field with type number
+    country: 'ge', // required field with type string
+    salary: 400 // required field with type number
 };
 
 db.create(person);
-console.log(db.readAll());
-db.update({id: 1, age: 20})
-// console.log(db.read(1));
-console.log(db.readAll());
+db.create(person2);
+
+const query = {
+    country: 'ge',
+    age: {
+        min: 20
+    },
+    salary: {
+        min: 300,
+        max: 600
+    }
+};
+const customers = db.find(query);
+console.log(customers);
+
