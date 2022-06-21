@@ -55,7 +55,14 @@ class DB {
     }
     readAll(...arg) {
         if(arg.length === 0){
-            return this.map.values();
+            let personArr = []
+            this.map.forEach((value, index) => {
+                personArr.push({
+                    id: index,
+                    ...value
+                })
+            })
+            return personArr;
         }
         else{
             throw new Error("You can not assign a parameter to this method");
