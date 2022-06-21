@@ -27,17 +27,17 @@ class DB {
         this.id = 0
     }
     checkObj(person){
-        if(!person.hasOwnProperty('name') && person.name !== 'string'){
-            throw new Error("person object should have property name which is string");
+        if(!person.hasOwnProperty('name') || typeof person.name !== 'string'){
+            throw new Error("The person must have the property name and it must be a string");
         }
-        if(!person.hasOwnProperty('age') && person.age !== 'number'){
-            throw new Error("person object should have property age which is number");
+        if(!person.hasOwnProperty('age') || typeof person.age !== 'number'){
+            throw new Error("The person must have the property age and it must be a number");
         }
-        if(!person.hasOwnProperty('country') && person.country !== 'string'){
-            throw new Error("person object should have property country which is string");
+        if(!person.hasOwnProperty('country') || typeof person.country !== 'string'){
+            throw new Error("The person must have the property country and it must be a string");
         }
-        if(!person.hasOwnProperty('salary') && person.salary !== 'number'){
-            throw new Error("person object should have property salary which is number");
+        if(!person.hasOwnProperty('salary') || typeof person.salary !== 'number'){
+            throw new Error("The person must have the property salary and it must be a number");
         }
     }
     create(person) {
@@ -64,11 +64,11 @@ class DB {
     update(upObj) {
         if(upObj.hasOwnProperty('id')){
             if(typeof upObj.id === 'string'){
-                throw new Error("er");
+                throw new Error("Id should not be a string");
             }else if(Object.keys(upObj).length < 2){
-                throw new Error("error");
+                throw new Error("passed object must have at least two property");
             }else if(!this.map.get(upObj.id)){
-                throw new Error("err");
+                throw new Error("The given ID did not match any of them");
             }else{
                 Object.assign(this.map.get(upObj.id), upObj);
             }
@@ -76,7 +76,7 @@ class DB {
     }
     delete(id) {
         if(!this.map.get(upObj.id)){
-            throw new Error("err");
+            throw new Error("The given ID did not match any of them");
         }else{
             this.map.delete(id);
             return true;
