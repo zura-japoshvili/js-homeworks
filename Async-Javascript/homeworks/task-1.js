@@ -40,3 +40,21 @@ send(url)
     .catch(error => {
         console.log(error.message);
     });
+
+
+
+    // if(typeof country !=='string'){
+    //     throw new TypeError("Country parameter should be a string");
+    // }
+    // new Promise((resolve, reject) => {
+    //     this.url += "?region=" + country;
+    //     get(this.url, (error, meta, body) => {
+    //         const { data } = JSON.parse(body);
+    //         const  statusCode  = meta.status;
+    //         if(statusCode === 200){
+    //             resolve(data);
+    //         }else{
+    //             reject(`We have error, status code: ${statusCode}`)
+    //         }
+    //     });
+    // });
